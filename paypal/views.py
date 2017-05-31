@@ -14,8 +14,8 @@ def buy_my_item(request):
 
     ppp = PayPalPro(
               item=item,                            # what you're selling
-              payment_template="payment.html",      # template name for payment
-              confirm_template="confirmation.html", # template name for confirmation
+              # payment_template="payment.html",      # template name for payment
+              # confirm_template="confirm.html", # template name for confirmation
               success_url="/success/",              # redirect location after success
               nvp_handler=nvp_handler)
     return ppp(request)

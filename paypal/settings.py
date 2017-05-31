@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import django
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +43,28 @@ INSTALLED_APPS = [
     'paypal.pro',
 ]
 
+DATABASES = {'default':
+                 {'ENGINE': 'django.db.backends.sqlite3',
+                  'NAME': 'test.db',
+                  }}
+PAYPAL_IDENTITY_TOKEN = ''
+INSTALLED_APPS = [
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'paypal.pro',
+                     'paypal.standard',
+                     'paypal.standard.ipn',
+                     'paypal.standard.pdt',
+                 ] + (['south'] if django.VERSION < (1, 7) else [])
+CACHES = {
+             'default': {
+                 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+                 'TIMEOUT': 0,
+                 'KEY_PREFIX': 'paypal_tests_',
+             }
+         }
+MIDDLEWARE_CLASSES = []
+DEBUG = True
 
 STATIC_URL = '/static/'
 
@@ -49,3 +72,19 @@ PAYPAL_TEST = True
 PAYPAL_WPP_USER = "sashpro-facilitator_api1.mail.ru"
 PAYPAL_WPP_PASSWORD = "6CCHUJYHTFAHU4SG"
 PAYPAL_WPP_SIGNATURE = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-ADPMmYaB3wNKmQovusZaIqITbV2a"
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
