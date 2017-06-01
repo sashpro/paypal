@@ -26,7 +26,7 @@ SECRET_KEY = 'j771+&4aa3walrz-kns8d+#%6**xzai27m)gz7o4l0&@0(1^3f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['40ade5eb.ngrok.io']
 
 ROOT_URLCONF = 'paypal.urls'
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'paypal.standard.ipn'
     'paypal.standard',
     'paypal.pro',
 ]

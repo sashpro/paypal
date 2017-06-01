@@ -145,7 +145,7 @@ class PayPalPro(object):
             if success:
                 return HttpResponseRedirect(self.success_url)
             else:
-                self.context['errors'] = self.errors['processing']
+                self.context['errors'] = self.errors['processing']+'validate_payment_form'
 
         self.context[self.form_context_name] = form
         self.context.setdefault("errors", self.errors['form'])
@@ -194,7 +194,7 @@ class PayPalPro(object):
                 nvp = wpp.doExpressCheckoutPayment(self.item)
             self.handle_nvp(nvp)
         except PayPalFailure:
-            self.context['errors'] = self.errors['processing']
+            self.context['errors'] = self.errors['processing']+'validate_confirm_form'
             return self.render_payment_form()
         else:
             return HttpResponseRedirect(self.success_url)

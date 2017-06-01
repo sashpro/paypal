@@ -27,12 +27,14 @@ class PaymentForm(forms.Form):
         """Process a PayPal direct payment."""
         warn_untested()
         from paypal.pro.helpers import PayPalWPP
-
+        from django.conf import settings
+        import pdb; pdb.set_trace()
         wpp = PayPalWPP(request)
         params = self.cleaned_data
         params['creditcardtype'] = self.fields['acct'].card_type
         params['expdate'] = self.cleaned_data['expdate'].strftime("%m%Y")
-        params['ipaddress'] = request.META.get("REMOTE_ADDR", "")
+        # params['ipaddress'] = 'https://%s' % settings.ALLOWED_HOSTS[0]
+        params['ipaddress'] = request.META.get("REMOTE_ADDR", settings.ALLOWED_HOSTS[0])
         params.update(item)
 
         try:
